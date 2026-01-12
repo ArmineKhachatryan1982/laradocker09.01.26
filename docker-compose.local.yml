@@ -9,7 +9,7 @@ services:
       - "8876:80"                       # локальный порт 8876 -> порт 80 контейнера
     volumes:
       - ./:/var/www/
-      - ./_docker/nginx/local.conf/:/etc/nginx/conf.d/
+      - ./_docker/nginx/local.conf:/etc/nginx/conf.d/
     depends_on:
       - app
 

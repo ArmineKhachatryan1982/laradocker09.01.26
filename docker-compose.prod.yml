@@ -10,7 +10,7 @@ services:
        - "443:443"                   # локальный порт 8876 -> порт 80 контейнера
     volumes:
       - ./:/var/www/
-      - ./_docker/nginx/prod.conf/:/etc/nginx/conf.d/
+      - ./_docker/nginx/prod.conf:/etc/nginx/conf.d/
     depends_on:
       - app
 
