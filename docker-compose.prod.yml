@@ -5,12 +5,13 @@ services:
   nginx:
     image: nginx:latest
     container_name: laradocker_nginx
+    restart: unless-stopped
     ports:
        - "80:80"
        - "443:443"                   # локальный порт 8876 -> порт 80 контейнера
     volumes:
       - ./:/var/www/
-      - ./_docker/nginx/prod.conf:/etc/nginx/conf.d/
+      - ./_docker/nginx/conf.d/prod.conf:/etc/nginx/conf.d/
     depends_on:
       - app
 
