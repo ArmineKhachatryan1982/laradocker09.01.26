@@ -1,18 +1,18 @@
 services:
-  nginx:
-    image: nginx:latest
-    container_name: laradocker_nginx
-    ports:
-      - "8081:80"
-      - "8443:443"
-    volumes:
-      - /var/www/laradocker09.01.26:/var/www
-      - ./_docker/nginx/conf.d/prod.conf:/etc/nginx/conf.d/default.conf
-      - /etc/letsencrypt:/etc/letsencrypt:ro
-    depends_on:
-      - app
-    networks:
-      - laravel_network
+  # nginx:
+  #   image: nginx:latest
+  #   container_name: laradocker_nginx
+  #   ports:
+  #     - "8081:80"
+  #     - "8443:443"
+  #   volumes:
+  #     - /var/www/laradocker09.01.26:/var/www
+  #     - ./_docker/nginx/conf.d/prod.conf:/etc/nginx/conf.d/default.conf
+  #     - /etc/letsencrypt:/etc/letsencrypt:ro
+  #   depends_on:
+  #     - app
+  #   networks:
+  #     - laravel_network
 
   app:
     build:
