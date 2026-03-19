@@ -22,7 +22,7 @@ services:
     ports:
       - "9001:9000"
     volumes:
-      - /var/www/laradocker09.01.26:/var/www
+      - /var/www/laradocker09.01.26:/var/www/laradocker09.01.26
     depends_on:
       - db
     networks:
