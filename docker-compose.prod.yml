@@ -20,7 +20,7 @@ services:
       dockerfile: _docker/app/Dockerfile
     container_name: laradocker_app
     ports:
-      - "9000:9000"
+      - "9001:9000"
     volumes:
       - /var/www/laradocker09.01.26:/var/www
     depends_on:
