@@ -36,4 +36,4 @@ jobs:
 
             # Кешируем конфигурацию
             docker compose -f docker-compose.prod.yml run --rm app php artisan config:cache
-            # ////////
+            # //////////
