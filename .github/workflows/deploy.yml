@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@master
         with:
@@ -18,22 +17,21 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            # Переходим в папку проекта
+            # Переходим в папку проекта на сервере
             cd /var/www/laradocker09.01.26
 
-            # Обновляем код
+            # Обновляем код с GitHub
             git pull origin main
 
             # Пересобираем контейнеры
             docker compose -f docker-compose.prod.yml down
             docker compose -f docker-compose.prod.yml up -d --build
 
-            # Устанавливаем зависимости Laravel
-            docker compose -f docker-compose.prod.yml run --rm app composer install --no-interaction --optimize-autoloader
+            # Устанавливаем зависимости Laravel внутри контейнера app
+            docker compose -f docker-compose.prod.yml run --rm -w /var/www/laradocker09.01.26 app composer install --no-interaction --optimize-autoloader
 
             # Прогоняем миграции
-            docker compose -f docker-compose.prod.yml run --rm app php artisan migrate --force
+            docker compose -f docker-compose.prod.yml run --rm -w /var/www/laradocker09.01.26 app php artisan migrate --force
 
-            # Кешируем конфигурацию
-            docker compose -f docker-compose.prod.yml run --rm app php artisan config:cache
-            # //////////
+            # Кешируем конфигурацию Laravel
+            docker compose -f docker-compose.prod.yml run --rm -w /var/www/laradocker09.01.26 app php artisan config:cache
